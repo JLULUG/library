@@ -1,0 +1,220 @@
+:root {
+    --title-font-size: 2rem;
+    --splash-height: 24rem;
+    --bg: white;
+    --fg: black;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    background: url("./paul-melki-bByhWydZLW0-unsplash.jpg") center / cover no-repeat fixed;
+    line-height: 1.15;
+    font-family: sans-serif;
+}
+
+
+header {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: var(--splash-height);
+    width: 80%;
+    margin: 0 10%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 0.5em black;
+}
+header h1 {
+    border: 0.5rem solid white;
+    padding: 1em 2em;
+    line-height: 1.5;
+    white-space: nowrap;
+    font-size: var(--title-font-size);
+    font-weight: bold;
+}
+button {
+    border: none;
+    padding: .5rem 1rem;
+    white-space: nowrap;
+    font-size: 1rem;
+    background-color: #0E419C;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+button:hover {
+    filter: brightness(90%);
+}
+button:active {
+    filter: brightness(80%);
+}
+
+
+main {
+    z-index: 2;
+    position: absolute;
+    top: var(--splash-height);
+    left: 0;
+    width: 100%;
+    min-height: calc(100% - var(--splash-height));
+    padding: 1rem;
+    background-color: var(--bg);
+    color: var(--fg);
+}
+main>div {
+    width: fit-content;
+    margin: 0 auto;
+}
+#loading {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto;
+    border: 6px solid var(--fg);
+    border-color: var(--fg) transparent var(--fg) transparent;
+    border-radius: 50%;
+    animation: loading 1.2s linear infinite;
+}
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+[v-cloak] {
+    display: none;
+}
+
+
+table {
+    border: 1px solid #bbbb;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+}
+table thead,
+table tbody tr :nth-child(3),  /* ISBN */
+table tbody tr :nth-child(4) { /* status */
+    white-space: nowrap;
+}
+table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #bbbb;
+    color: var(--fg);
+}
+table tbody td {
+    margin: 0;
+    border-left: 1px solid #bbbb;
+    border-width: 0 0 0 1px;
+    padding: .5em 1em;
+}
+table tbody tr:nth-child(2n) {
+    background-color: #bbb5;
+}
+table tbody tr :nth-child(3) { /* ISBN */
+    font-size: 0.7rem;
+}
+table tbody tr :nth-child(6)>div { /* tags */
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.2rem;
+}
+a {
+    color: #0E419C;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+mark {
+    padding: 1px 0.3rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    color: white;
+}
+mark.available {
+    background-color: #1cb841;
+}
+mark.unavailable {
+    background-color: #ca3c3c;
+}
+
+
+footer {
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+
+@media screen and (max-width: 1024px) {
+    /* Hide source */
+    table tr :nth-child(5) { /* source */
+        display: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    /* Hide ISBN, category */
+    table tr :nth-child(3),  /* ISBN */
+    table tr :nth-child(6) { /* tags */
+        display: none;
+    }
+}
+@media screen and (max-width: 568px) {
+    :root {
+        --title-font-size: 1.5rem;
+        --splash-height: 20rem;
+    }
+    /* Hide author */
+    table tr :nth-child(2) { /* author */
+        display: none;
+    }
+    dialog {
+        width: 100%;
+    }
+}
+/* Mobile Landscape */
+@media screen and (orientation: landscape) and (max-height: 568px) {
+    :root {
+        --title-font-size: 1.5rem;
+        --splash-height: 16rem;
+    }
+    header h1 br { /* one-line h1 */
+        display: none;
+    }
+}
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --bg: black;
+        --fg: white;
+    }
+    a {
+        color: #5f95f1;
+    }
+}
+@media print {
+    body {
+        background: none;
+    }
+    header {
+        position: absolute;
+        color: black;
+        text-shadow: none;
+    }
+    header h1 {
+        border: 0.2rem solid black;
+    }
+}
