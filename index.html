@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUG@JLU 互助书柜</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+            <h1>LUG @ JLU <br>互助书柜</h1>
+            <p>
+                <button onclick="window.open('https://jlulug.org/library/', '_blank')">借阅须知</button>
+            </p>
+    </header>
+    
+    <main><div>
+        <div v-if="!books.length" id="loading"></div>
+        <table v-else v-cloak>
+            <thead>
+                <tr>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>ISBN</th>
+                    <th>状态</th>
+                    <th>来源</th>
+                    <th>分类</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="book in books">
+                    <td><a :href="book.url">{{ book.name }}</a></td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td v-if="book.avail">
+                        <mark class="available">可用 <span v-if="book.avail > 1">{{ book.avail }} 本</mark>
+                    </td>
+                    <td v-else>
+                        <mark class="unavailable">已借出</mark>
+                    </td>
+                    <td>{{ book.source }}</td>
+                    <td><div>
+                        <mark v-for="tag in book_tags(book.tags)" :style="{ backgroundColor: tag[1] }">
+                            {{ tag[0] }}
+                        </mark>
+                    </div></td>
+                </tr>
+            </tbody>
+        </table>
+        <footer>
+            <p>本页面由<a href="https://jlulug.org" target="_blank">吉林大学 Linux 用户协会</a>维护，保留一切权利。</p>
+            <p>吉林大学 Linux 用户协会是由 GNU/Linux 用户与爱好者自愿结成的注册社团，旨在联络沟通同道中人，推广 GNU/Linux 的使用，宣传自由软件的价值，培养开放社区氛围。</p>
+        </footer>
+    </div></main>
+    
+    <script src="./vue.global.prod.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
